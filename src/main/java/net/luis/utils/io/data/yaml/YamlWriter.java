@@ -59,7 +59,7 @@ public class YamlWriter implements AutoCloseable {
 	public void writeYaml(@NotNull YamlDocument document) {
 		Objects.requireNonNull(document, "Yaml document must not be null");
 		for (String key : document.keySet()) {
-			this.writeYaml(Objects.requireNonNull(document.getStruct(key), "yaml struct must not be null"));
+			this.writeYaml(Objects.requireNonNull(document.get(key), "yaml struct must not be null"));
 		}
 	}
 	

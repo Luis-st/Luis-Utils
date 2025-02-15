@@ -38,12 +38,14 @@ public class YamlStruct extends AbstractYamlNode implements YamlNode {
 	
 	public YamlStruct(@NotNull String key, @NotNull String anchor) {
 		this.key = Objects.requireNonNull(key, "Key must not be null");
+		YamlHelper.validateYamlKey(this.key);
 		this.node = new YamlScalar(Objects.requireNonNull(anchor, "Anchor must not be null"));
 		this.anchorDefined = true;
 	}
 	
 	public YamlStruct(@NotNull String key, @NotNull YamlNode node) {
 		this.key = Objects.requireNonNull(key, "Key must not be null");
+		YamlHelper.validateYamlKey(this.key);
 		this.node = Objects.requireNonNull(node, "Node must not be null");
 		if (this.node instanceof YamlStruct) {
 			throw new YamlTypeException("Node must not be a yaml struct");

@@ -46,6 +46,9 @@ public abstract class AbstractYamlNode implements YamlNode {
 	@Override
 	public void setAnchor(@Nullable String anchor) {
 		this.anchor = anchor;
+		if (this.anchor != null) {
+			YamlHelper.validateYamlAnchor(this.anchor);
+		}
 	}
 	
 	protected @NotNull String getBaseString(@NotNull YamlConfig config) {

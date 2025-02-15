@@ -49,14 +49,20 @@ public class YamlMapping extends AbstractYamlNode {
 	}
 	
 	//region Anchor operations
+	private void addAnchor(@NotNull String anchor) {
+		Objects.requireNonNull(anchor, "Anchor must not be null");
+		YamlHelper.validateYamlAnchor(anchor);
+		this.anchors.add(anchor);
+	}
+	
 	public void addAnchor(String @NotNull ... anchor) {
 		Objects.requireNonNull(anchor, "Anchor must not be null");
-		this.anchors.addAll(Arrays.asList(anchor));
+		this.addAnchor(Arrays.asList(anchor));
 	}
 	
 	public void addAnchor(@NotNull List<String> anchors) {
 		Objects.requireNonNull(anchors, "Anchors must not be null");
-		this.anchors.addAll(anchors);
+		anchors.forEach(this::addAnchor);
 	}
 	
 	public void removeAnchor(@Nullable String anchor) {
@@ -109,6 +115,7 @@ public class YamlMapping extends AbstractYamlNode {
 	//region Add operations
 	public @Nullable YamlNode add(@NotNull String key, @Nullable YamlNode node) {
 		Objects.requireNonNull(key, "Key must not be null");
+		YamlHelper.validateYamlKey(key);
 		return this.nodes.put(key, node == null ? YamlNull.INSTANCE : node);
 	}
 	
@@ -186,6 +193,7 @@ public class YamlMapping extends AbstractYamlNode {
 	//region Replace operations
 	public @Nullable YamlNode replace(@NotNull String key, @Nullable YamlNode newNode) {
 		Objects.requireNonNull(key, "Key must not be null");
+		YamlHelper.validateYamlKey(key);
 		if (newNode instanceof YamlStruct struct) {
 			key = struct.getKey();
 			newNode = struct.getNode();
@@ -196,6 +204,7 @@ public class YamlMapping extends AbstractYamlNode {
 	public boolean replace(@NotNull String key, @NotNull YamlNode oldNode, @Nullable YamlNode newNode) {
 		Objects.requireNonNull(key, "Key must not be null");
 		Objects.requireNonNull(oldNode, "Old node must not be null");
+		YamlHelper.validateYamlKey(key);
 		if (newNode instanceof YamlStruct struct) {
 			key = struct.getKey();
 			newNode = struct.getNode();

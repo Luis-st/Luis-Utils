@@ -200,7 +200,7 @@ public class JsonReader implements AutoCloseable {
 	 * <ul>
 	 *     <li>Empty object: {@code {}}</li>
 	 *     <li>Object with one entry: {@code {"key": "value"}}</li>
-	 *     <li>Object with multiple entries: {@code {"key1": "value1", "key2": "value2", "key3": "value3"}'}/li>
+	 *     <li>Object with multiple entries: {@code {"key1": "value1", "key2": "value2", "key3": "value3"}'}</li>
 	 * </ul>
 	 * <p>
 	 *     In strict mode, the reader expects the keys to be quoted and no trailing comma after the last entry.<br>
